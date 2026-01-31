@@ -33,14 +33,15 @@ namespace SGF
         }
 
         /// <inheritdoc/>
-        public void AddSource(string hintName, string source)
-            => AddSource(hintName, SourceText.From(source, Encoding.UTF8));
+        public void AddSource(string hintName, string source, bool logSourceAdded = true)
+            => AddSource(hintName, SourceText.From(source, Encoding.UTF8), logSourceAdded);
 
         /// <inheritdoc/>
-        public void AddSource(string hintName, SourceText sourceText)
+        public void AddSource(string hintName, SourceText sourceText, bool logSourceAdded = true)
         {
             SourceCount++;
-            m_generator.Logger.Information($" SourceAdded: {SourceCount}. {hintName}");
+            if( logSourceAdded )
+                m_generator.Logger.Information($" SourceAdded: {SourceCount}. {hintName}");
             m_context.AddSource(hintName, sourceText);
         }
 
